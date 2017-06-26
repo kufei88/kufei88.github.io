@@ -5,16 +5,16 @@
   
   <title>springboot学习笔记(1) | Rafa&#39;sBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   org.springframework.boot   spring-boot-starter-parent   1.5.4.RELEASE   &amp;lt;groupId&amp;gt;org.springframework.boot">
+  <meta name="description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot学习笔记(1)">
 <meta property="og:url" content="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/index.html">
 <meta property="og:site_name" content="Rafa&#39;sBlog">
-<meta property="og:description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   org.springframework.boot   spring-boot-starter-parent   1.5.4.RELEASE   &amp;lt;groupId&amp;gt;org.springframework.boot">
-<meta property="og:updated_time" content="2017-06-24T14:41:27.798Z">
+<meta property="og:description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifa">
+<meta property="og:updated_time" content="2017-06-25T03:26:33.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot学习笔记(1)">
-<meta name="twitter:description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   org.springframework.boot   spring-boot-starter-parent   1.5.4.RELEASE   &amp;lt;groupId&amp;gt;org.springframework.boot">
+<meta name="twitter:description" content="利用Springboot 创建REST设计的web服务本文使用的ide是intellij idea  第一步新建一个maven的工程： 第二步在pom.xml中插入如下代码   &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifa">
   
     <link rel="alternate" href="/atom.xml" title="Rafa&#39;sBlog" type="application/atom+xml">
   
@@ -56,9 +56,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kufei88.github.io"></form>
@@ -92,9 +92,14 @@
         <h2 id="利用Springboot-创建REST设计的web服务"><a href="#利用Springboot-创建REST设计的web服务" class="headerlink" title="利用Springboot 创建REST设计的web服务"></a>利用Springboot 创建REST设计的web服务</h2><p>本文使用的ide是intellij idea</p>
 <ol>
 <li>第一步<br>新建一个maven的工程：</li>
-<li>第二步<br>在pom.xml中插入如下代码<br><br><pre><parent><br>   <groupid>org.springframework.boot</groupid><br>   <artifactid>spring-boot-starter-parent</artifactid><br>   <version>1.5.4.RELEASE</version><br></parent><br><dependencies><br>   <dependency><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-</code></pre>   </dependency><br></dependencies><br></li>
+<li>第二步<br>在pom.xml中插入如下代码<br><br>   <code><pre><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+&lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
+</code></pre>   <dependencies><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>   </dependencies><br>   </code><br></li>
 <li>第三步创建springboot主程序：<pre>
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -127,12 +132,10 @@
     }
 </pre>
 </li>
-<li><p>创建controller<br><pre><br>@RestController<br>public class GreetingController {</pre></p>
-<p>private static final String template = “Hello, %s!”;<br>private final AtomicLong counter = new AtomicLong();</p>
-<p>@RequestMapping(“/greeting”)<br>public Greeting greeting(@RequestParam(value=”name”, defaultValue=”World”) String name) {</p>
+<li><p>创建controller<br><pre><br><code><br>@RestController<br>public class GreetingController {<br>private static final String template = “Hello, %s!”;<br>private final AtomicLong counter = new AtomicLong();<br>@RequestMapping(“/greeting”)<br>public Greeting greeting(@RequestParam(value=”name”, defaultValue=”World”) String name) {</code></pre></p>
 <pre><code>return new Greeting(counter.incrementAndGet(),
                     String.format(template, name));
-</code></pre><p>}<br>}<br><br>@RestController相当于@Controller和@ResponseBody的主合体，会自动通过 Jackson 2向请求端返回json对象，</p>
+</code></pre><p>}<br>}<br><br><br>@RestController相当于@Controller和@ResponseBody的主合体，会自动通过 Jackson 2向请求端返回json对象，</p>
 </li>
 <li><p>运行上面定义的主函数，在浏览器中输入127.0.0.1:8080/greeting就能得到下面的json字符串<br>{“id”:1,”content”:”Hello, World!”}</p>
 </li>
@@ -141,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4bdylv80002q8viam4sk290" class="article-share-link">Partager</a>
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4e35d8200024ovi6d99gi2z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,9 +153,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/06/25/springboot学习笔记-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          springboot学习笔记(二)
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/06/23/mysql日志/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">mysql日志</div>
     </a>
   
@@ -185,9 +197,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/25/springboot学习笔记-三/">springboot学习笔记(三)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/25/springboot学习笔记-2/">springboot学习笔记(二)</a>
+          </li>
         
           <li>
             <a href="/2017/06/25/springboot学习笔记-1/">springboot学习笔记(1)</a>
@@ -214,7 +234,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Rafa<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

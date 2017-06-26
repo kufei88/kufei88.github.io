@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kufei88.github.io"></form>
@@ -67,6 +67,224 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-springboot学习笔记-三" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/25/springboot学习笔记-三/" class="article-date">
+  <time datetime="2017-06-25T12:45:39.000Z" itemprop="datePublished">2017-06-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/25/springboot学习笔记-三/">springboot学习笔记(三)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="springboot-读取rest接口的json数据转化为实体类"><a href="#springboot-读取rest接口的json数据转化为实体类" class="headerlink" title="springboot 读取rest接口的json数据转化为实体类"></a>springboot 读取rest接口的json数据转化为实体类</h1><p>springboot提供了RestTemplate用来解析rest接口返回的json对象</p>
+<p>首先创建实体类</p>
+<pre>
+    <code>
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public class Quote {
+
+            private String type;
+            private Value value;
+
+            public Quote() {
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+            public Value getValue() {
+                return value;
+            }
+
+            public void setValue(Value value) {
+                this.value = value;
+            }
+
+            @Override
+            public String toString() {
+                return "Quote{" +
+                        "type='" + type + '\'' +
+                        ", value=" + value +
+                        '}';
+            }
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public class Value {
+
+            private Long id;
+            private String quote;
+
+            public Value() {
+            }
+
+            public Long getId() {
+                return this.id;
+            }
+
+            public String getQuote() {
+                return this.quote;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public void setQuote(String quote) {
+                this.quote = quote;
+            }
+
+            @Override
+            public String toString() {
+                return "Value{" +
+                        "id=" + id +
+                        ", quote='" + quote + '\'' +
+                        '}';
+            }
+        }
+    </code>
+</pre>
+@JsonIgnoreProperties这个注解表示如果属性不存在就忽视
+
+在主类中增加两个Bean
+
+<pre>
+    <code>
+        @SpringBootApplication
+        public class Application {
+
+            private static final Logger log = LoggerFactory.getLogger(Application.class);
+
+            public static void main(String args[]) {
+                SpringApplication.run(Application.class);
+            }
+
+            @Bean
+            public RestTemplate restTemplate(RestTemplateBuilder builder) {
+                return builder.build();
+            }
+
+            @Component
+            public class TestImplCommandLineRunner implements CommandLineRunner {
+                @Autowired
+                RestTemplate restTemplate;
+                @Override
+                public void run(String... args) throws Exception {
+
+                    Quote quote = restTemplate.getForObject(
+                            "http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
+                    log.info(quote.toString());
+                }
+            }
+
+        }
+    </code>
+</pre>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-三/" data-id="cj4e35d8600044ovim9g1owzv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-springboot学习笔记-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/25/springboot学习笔记-2/" class="article-date">
+  <time datetime="2017-06-25T11:29:33.000Z" itemprop="datePublished">2017-06-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/25/springboot学习笔记-2/">springboot学习笔记(二)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="springboot-任务调度"><a href="#springboot-任务调度" class="headerlink" title="springboot 任务调度"></a>springboot 任务调度</h2><p>spring内部有一个task是Spring自带的一个设定时间自动任务调度</p>
+<p>springboot通过注解的方式可以非常方便的实现该功能</p>
+<p>首先，定义一个ScheduledTasks.java类实现主要功能</p>
+<pre>
+    <code>
+        @Component
+            public class ScheduledTasks {
+
+                private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+
+                private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+                @Scheduled(fixedRate = 5000)    //每5秒执行一次
+                public void reportCurrentTime() {
+                    log.info("The time is now {}", dateFormat.format(new Date()));
+                }
+            }
+    </code>
+</pre>
+
+
+<p>然后在springboot主类上加一个注解就可以了</p>
+<pre>
+    <code>
+        @SpringBootApplication
+        @EnableScheduling
+        public class Application {
+
+            public static void main(String[] args) throws Exception {
+                SpringApplication.run(Application.class);
+            }
+        }
+    </code>
+</pre>
+
+<p>如果ScheduledTasks跟下面的这个Application在同一个包，那这样写就可以了，如果不在一个包，<br>那在application上面要加一个注解@ComponentScan(‘需要加载的包名’)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-2/" data-id="cj4e35d8400034ovigkrmxzhs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-springboot学习笔记-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -93,9 +311,14 @@
         <h2 id="利用Springboot-创建REST设计的web服务"><a href="#利用Springboot-创建REST设计的web服务" class="headerlink" title="利用Springboot 创建REST设计的web服务"></a>利用Springboot 创建REST设计的web服务</h2><p>本文使用的ide是intellij idea</p>
 <ol>
 <li>第一步<br>新建一个maven的工程：</li>
-<li>第二步<br>在pom.xml中插入如下代码<br><br><parent><br>   <groupid>org.springframework.boot</groupid><br>   <artifactid>spring-boot-starter-parent</artifactid><br>   <version>1.5.4.RELEASE</version><br></parent><br><dependencies><br>   <dependency><pre><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-</code></pre>   </dependency><br></dependencies><br></li>
+<li>第二步<br>在pom.xml中插入如下代码<br><br>   <code><pre><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+&lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
+</code></pre>   <dependencies><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>   </dependencies><br>   </code><br></li>
 <li>第三步创建springboot主程序：<pre>
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -128,12 +351,10 @@
     }
 </pre>
 </li>
-<li><p>创建controller<br><pre><br>@RestController<br>public class GreetingController {</pre></p>
-<p>private static final String template = “Hello, %s!”;<br>private final AtomicLong counter = new AtomicLong();</p>
-<p>@RequestMapping(“/greeting”)<br>public Greeting greeting(@RequestParam(value=”name”, defaultValue=”World”) String name) {</p>
+<li><p>创建controller<br><pre><br><code><br>@RestController<br>public class GreetingController {<br>private static final String template = “Hello, %s!”;<br>private final AtomicLong counter = new AtomicLong();<br>@RequestMapping(“/greeting”)<br>public Greeting greeting(@RequestParam(value=”name”, defaultValue=”World”) String name) {</code></pre></p>
 <pre><code>return new Greeting(counter.incrementAndGet(),
                     String.format(template, name));
-</code></pre><p>}<br>}<br><br>@RestController相当于@Controller和@ResponseBody的主合体，会自动通过 Jackson 2向请求端返回json对象，</p>
+</code></pre><p>}<br>}<br><br><br>@RestController相当于@Controller和@ResponseBody的主合体，会自动通过 Jackson 2向请求端返回json对象，</p>
 </li>
 <li><p>运行上面定义的主函数，在浏览器中输入127.0.0.1:8080/greeting就能得到下面的json字符串<br>{“id”:1,”content”:”Hello, World!”}</p>
 </li>
@@ -142,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4bdylv80002q8viam4sk290" class="article-share-link">Partager</a>
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4e35d8200024ovi6d99gi2z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -181,7 +402,7 @@ general_log_file = &apos;c:/mysql.log&apos;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/23/mysql日志/" data-id="cj4bdylus0000q8vi6c8jaxja" class="article-share-link">Partager</a>
+      <a data-url="https://kufei88.github.io/2017/06/23/mysql日志/" data-id="cj4e35d7z00014ovikbkhgqnb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,7 +447,7 @@ general_log_file = &apos;c:/mysql.log&apos;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/22/hello-world/" data-id="cj4bdylv40001q8vix9amjybm" class="article-share-link">Partager</a>
+      <a data-url="https://kufei88.github.io/2017/06/22/hello-world/" data-id="cj4e35d7u00004oviylo145bi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,9 +482,17 @@ general_log_file = &apos;c:/mysql.log&apos;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/25/springboot学习笔记-三/">springboot学习笔记(三)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/25/springboot学习笔记-2/">springboot学习笔记(二)</a>
+          </li>
         
           <li>
             <a href="/2017/06/25/springboot学习笔记-1/">springboot学习笔记(1)</a>
@@ -290,7 +519,7 @@ general_log_file = &apos;c:/mysql.log&apos;
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Rafa<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
