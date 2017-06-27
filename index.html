@@ -68,6 +68,146 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-springboot学习笔记-四" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/springboot学习笔记-四/" class="article-date">
+  <time datetime="2017-06-26T22:29:40.000Z" itemprop="datePublished">2017-06-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/springboot学习笔记-四/">springboot学习笔记(四)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#使用springboot配置LDAP目录结构的用户权限#</p>
+<p>第一步通过maven加载需要用到的包</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.ldap&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-ldap-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-security-ldap&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.unboundid&lt;/groupId&gt;
+    &lt;artifactId&gt;unboundid-ldapsdk&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-security-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>第二步添加一个controller响应web端的请求</p>
+<pre>
+    <code>
+        @RestController
+            public class HomeController {
+
+                @GetMapping("/")
+                public String index() {
+                    return "Welcome to the home page!";
+                }
+            }
+    </code>
+</pre>
+
+
+<p>第三部增加配置文件</p>
+<pre>
+    <code>
+        @Configuration
+        public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+            @Override
+            protected void configure(HttpSecurity http) throws Exception {
+                http
+                    .authorizeRequests()
+                        .anyRequest().fullyAuthenticated()
+                        .and()
+                    .formLogin();
+            }
+
+            @Override
+            public void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth
+                    .ldapAuthentication()
+                        .userDnPatterns("uid={0},ou=people")
+                        .groupSearchBase("ou=groups")
+                        .contextSource(contextSource())
+                        .passwordCompare()
+                            .passwordEncoder(new LdapShaPasswordEncoder())
+                            .passwordAttribute("userPassword");
+            }
+
+            @Bean
+            public DefaultSpringSecurityContextSource contextSource() {
+                return  new DefaultSpringSecurityContextSource(Arrays.asList("ldap://localhost:8389/"), "dc=springframework,dc=org");
+            }
+
+        }
+    </code>
+</pre>
+
+<p>第四部在main/resources中增加两个资源文件<br>文件1：application.properties</p>
+<p><code><br>spring.ldap.embedded.ldif=classpath:test-server.ldif<br>spring.ldap.embedded.base-dn=dc=springframework,dc=org<br>spring.ldap.embedded.port=8389<br></code></p>
+<p>文件2：test-server.ldif   //内部存放的是用户<br><code><br>dn: dc=springframework,dc=org<br>objectclass: top<br>objectclass: domain<br>objectclass: extensibleObject<br>dc: springframework</code></p>
+<p>dn: ou=groups,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: groups</p>
+<p>dn: ou=subgroups,ou=groups,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: subgroups</p>
+<p>dn: ou=people,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: people</p>
+<p>dn: ou=space cadets,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: space cadets</p>
+<p>dn: ou=\”quoted people\”,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: “quoted people”</p>
+<p>dn: ou=otherpeople,dc=springframework,dc=org<br>objectclass: top<br>objectclass: organizationalUnit<br>ou: otherpeople</p>
+<p>dn: uid=ben,ou=people,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: Ben Alex<br>sn: Alex<br>uid: ben<br>userPassword: {SHA}nFCebWjxfaLbHHG1Qk5UU4trbvQ=</p>
+<p>dn: uid=bob,ou=people,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: Bob Hamilton<br>sn: Hamilton<br>uid: bob<br>userPassword: bobspassword</p>
+<p>dn: uid=joe,ou=otherpeople,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: Joe Smeth<br>sn: Smeth<br>uid: joe<br>userPassword: joespassword</p>
+<p>dn: cn=mouse\, jerry,ou=people,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: Mouse, Jerry<br>sn: Mouse<br>uid: jerry<br>userPassword: jerryspassword</p>
+<p>dn: cn=slash/guy,ou=people,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: slash/guy<br>sn: Slash<br>uid: slashguy<br>userPassword: slashguyspassword</p>
+<p>dn: cn=quote\”guy,ou=\”quoted people\”,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: quote\”guy<br>sn: Quote<br>uid: quoteguy<br>userPassword: quoteguyspassword</p>
+<p>dn: uid=space cadet,ou=space cadets,dc=springframework,dc=org<br>objectclass: top<br>objectclass: person<br>objectclass: organizationalPerson<br>objectclass: inetOrgPerson<br>cn: Space Cadet<br>sn: Cadet<br>uid: space cadet<br>userPassword: spacecadetspassword</p>
+<p>dn: cn=developers,ou=groups,dc=springframework,dc=org<br>objectclass: top<br>objectclass: groupOfUniqueNames<br>cn: developers<br>ou: developer<br>uniqueMember: uid=ben,ou=people,dc=springframework,dc=org<br>uniqueMember: uid=bob,ou=people,dc=springframework,dc=org</p>
+<p>dn: cn=managers,ou=groups,dc=springframework,dc=org<br>objectclass: top<br>objectclass: groupOfUniqueNames<br>cn: managers<br>ou: manager<br>uniqueMember: uid=ben,ou=people,dc=springframework,dc=org<br>uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org</p>
+<p>dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org<br>objectclass: top<br>objectclass: groupOfUniqueNames<br>cn: submanagers<br>ou: submanager<br>uniqueMember: uid=ben,ou=people,dc=springframework,dc=org</p>
+<p></p>
+<p>启动程序，访问<a href="http://127.0.0.1:8080/就会跳出一个登陆页面,你输入ben/benspassword之后，才能跳到正常的返回welcome的页面" target="_blank" rel="external">http://127.0.0.1:8080/就会跳出一个登陆页面,你输入ben/benspassword之后，才能跳到正常的返回welcome的页面</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kufei88.github.io/2017/06/27/springboot学习笔记-四/" data-id="cj4fk7mcg0004q4vi8wjs0wu9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-springboot学习笔记-三" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/06/25/springboot学习笔记-三/" class="article-date">
@@ -204,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-三/" data-id="cj4e35d8600044ovim9g1owzv" class="article-share-link">Share</a>
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-三/" data-id="cj4fk7mcf0003q4viy3upi7ss" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-2/" data-id="cj4e35d8400034ovigkrmxzhs" class="article-share-link">Share</a>
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-2/" data-id="cj4fk7mcj0005q4vig00hsqcg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4e35d8200024ovi6d99gi2z" class="article-share-link">Share</a>
+      <a data-url="https://kufei88.github.io/2017/06/25/springboot学习笔记-1/" data-id="cj4fk7mca0001q4virjf62hat" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +542,7 @@ general_log_file = &apos;c:/mysql.log&apos;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/23/mysql日志/" data-id="cj4e35d7z00014ovikbkhgqnb" class="article-share-link">Share</a>
+      <a data-url="https://kufei88.github.io/2017/06/23/mysql日志/" data-id="cj4fk7mcd0002q4vi2hdkgoir" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +587,7 @@ general_log_file = &apos;c:/mysql.log&apos;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kufei88.github.io/2017/06/22/hello-world/" data-id="cj4e35d7u00004oviylo145bi" class="article-share-link">Share</a>
+      <a data-url="https://kufei88.github.io/2017/06/22/hello-world/" data-id="cj4fk7mc40000q4vig3mdhcv3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -487,6 +627,10 @@ general_log_file = &apos;c:/mysql.log&apos;
       <ul>
         
           <li>
+            <a href="/2017/06/27/springboot学习笔记-四/">springboot学习笔记(四)</a>
+          </li>
+        
+          <li>
             <a href="/2017/06/25/springboot学习笔记-三/">springboot学习笔记(三)</a>
           </li>
         
@@ -500,10 +644,6 @@ general_log_file = &apos;c:/mysql.log&apos;
         
           <li>
             <a href="/2017/06/23/mysql日志/">mysql日志</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/22/hello-world/">Hello World</a>
           </li>
         
       </ul>
