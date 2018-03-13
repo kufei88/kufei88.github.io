@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springmvc配置apache.log4j/">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2018/03/13/HttpClient使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rafa">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/27/springmvc配置apache.log4j/" itemprop="url">springmvc配置apache.log4j</a></h1>
+                <a class="post-title-link" href="/2018/03/13/HttpClient使用/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,400 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T12:42:26Z">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HttpClient的试用"><a href="#HttpClient的试用" class="headerlink" title="HttpClient的试用"></a>HttpClient的试用</h3><ol>
+<li><p>HttpClient 是 Apache Jakarta Common下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP协议的客户端编程工具包，并且它支持 HTTP协议最新的版本和建议。<br><a href="http://hc.apache.org/" target="_blank" rel="external">下载地址</a></p>
+</li>
+<li><p>使用httpclient执行get请求</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个GET对象</div><div class="line">HttpGet get =new HttpGet(&quot;http://www.sogou.com&quot;);</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>执行get请求带参数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个uri对象</div><div class="line">URIBuilder uriBuilder = new URIBuilder(&quot;http://www.sogou.com/web&quot;);</div><div class="line">uriBuilder.addParameter(&quot;query&quot;,&quot;花千骨&quot;);</div><div class="line">HttpGet get = new HttpGet(uriBuilder.build());</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>使用httpclient执行post请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>带参数post请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//创建一个Entity。模拟一个表单</div><div class="line">List&lt;NameValuePair&gt;kvList = new ArrayList&lt;&gt;();</div><div class="line">kvList.add(new BasicNameValuePair(&quot;username&quot;,&quot;zhangsan&quot;));</div><div class="line">kvList.add(new BasicNameValuePair(&quot;password&quot;,&quot;123&quot;));</div><div class="line">//包装成一个Entity对象</div><div class="line">StringEntity entity = new UrlEncodedFormEntity(kvList,&quot;utf-8&quot;);</div><div class="line">//设置请求的内容</div><div class="line">post.setEntity(entity);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>post请求,参数是json对象</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">StringEntity entity = new StringEntity(jsonObject.toString(),&quot;utf-8&quot;);</div><div class="line">post.setEntity(entity);</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2018/03/13/springboot通过webstock主动给浏览器发消息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/13/springboot通过webstock主动给浏览器发消息/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T12:42:21Z">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="springboot通过webstock主动给浏览器发消息"><a href="#springboot通过webstock主动给浏览器发消息" class="headerlink" title="springboot通过webstock主动给浏览器发消息"></a>springboot通过webstock主动给浏览器发消息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private SimpMessagingTemplate template;</div><div class="line">    </div><div class="line">template.convertAndSend(&quot;/topic/greetings&quot;, object);</div></pre></td></tr></table></figure>
+<h2 id="maven打包不是本地的jar包"><a href="#maven打包不是本地的jar包" class="headerlink" title="maven打包不是本地的jar包"></a>maven打包不是本地的jar包</h2><p>先在本地库中添加文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Users\Administrator\.m2\repository\com\jishengsoft\alipay\alipay-sdk-java\20176015110526\alipay-sdk-java-20176015110526.jar</div></pre></td></tr></table></figure></p>
+<p>然后在pom.xml中增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   &lt;dependency&gt;  </div><div class="line">	&lt;groupId&gt;com.jishengsoft.alipay&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;alipay-sdk-java&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;20176015110526&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2018/03/13/maven实战笔记(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/13/maven实战笔记(一)/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T12:42:11Z">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-什么是maven"><a href="#1-什么是maven" class="headerlink" title="1. 什么是maven"></a>1. 什么是maven</h3><pre><code>maven是项目管理工具，主要用于jar包的管理，项目的构建，生成，发布等
+</code></pre><h3 id="2-maven指令"><a href="#2-maven指令" class="headerlink" title="2. maven指令"></a>2. maven指令</h3><pre><code>mvn clean compile    //先清空  再编译
+mvn clean test  //先清空  再执行单元测试
+mvn clean package  //先清空老的文件   再打包新的文件
+mvn clean install  //打包到本地库
+mvn archetype:generate   //初始化一个Maven项目
+</code></pre><h3 id="3-pom-xml文件"><a href="#3-pom-xml文件" class="headerlink" title="3. pom.xml文件"></a>3. pom.xml文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</div><div class="line">	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line">	&lt;groupId&gt;com.juven.mvnbook.account&lt;/groupId&gt;  //项目组id</div><div class="line">	&lt;artifactId&gt;account-email&lt;/artifactId&gt;          //项目id</div><div class="line">	&lt;name&gt;Account Email&lt;/name&gt;                     </div><div class="line">	&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;               //版本</div><div class="line"></div><div class="line">	&lt;dependencies&gt;                                 //引入的第三方包</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;2.5.6&lt;/version&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;spring-beans&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;2.5.6&lt;/version&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;2.5.6&lt;/version&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;2.5.6&lt;/version&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;javax.mail&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;mail&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;1.4.1&lt;/version&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;4.7&lt;/version&gt;</div><div class="line">			&lt;scope&gt;test&lt;/scope&gt;              //范围：test表示只在测试时依赖</div><div class="line">			                                 //compile表示编译时有效</div><div class="line">			                                // //provided编译和测试时有效，运行时无效</div><div class="line">		&lt;/dependency&gt;</div><div class="line">		&lt;dependency&gt;</div><div class="line">			&lt;groupId&gt;com.icegreen&lt;/groupId&gt;</div><div class="line">			&lt;artifactId&gt;greenmail&lt;/artifactId&gt;</div><div class="line">			&lt;version&gt;1.3.1b&lt;/version&gt;</div><div class="line">			&lt;scope&gt;test&lt;/scope&gt;</div><div class="line">		&lt;/dependency&gt;</div><div class="line">	&lt;/dependencies&gt;</div><div class="line"></div><div class="line">	&lt;build&gt;</div><div class="line">		&lt;plugins&gt;                                               //插件</div><div class="line">			&lt;plugin&gt;</div><div class="line">				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</div><div class="line">				&lt;configuration&gt;</div><div class="line">					&lt;source&gt;1.5&lt;/source&gt;</div><div class="line">					&lt;target&gt;1.5&lt;/target&gt;</div><div class="line">				&lt;/configuration&gt;</div><div class="line">			&lt;/plugin&gt;</div><div class="line">			&lt;plugin&gt;</div><div class="line">				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">				&lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</div><div class="line">				&lt;configuration&gt;</div><div class="line">					&lt;encoding&gt;UTF-8&lt;/encoding&gt;</div><div class="line">				&lt;/configuration&gt;</div><div class="line">			&lt;/plugin&gt;</div><div class="line">		&lt;/plugins&gt;</div><div class="line">	&lt;/build&gt;</div><div class="line"></div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
+<h3 id="4-maven仓库"><a href="#4-maven仓库" class="headerlink" title="4. maven仓库"></a>4. maven仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;repositories&gt;</div><div class="line">    </div><div class="line">&lt;/repositories&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2018/03/13/javaweb高级编程学习笔记-过滤器的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/13/javaweb高级编程学习笔记-过滤器的使用/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T12:42:07Z">
+                2018-03-13
               </time>
             
 
@@ -334,13 +726,46 @@
         
           
             <ol>
-<li>web.xml中增加listener</li>
+<li>过滤器是用来拦截访问servlet请求的，从而可以在请求在访问sevlet之前对请求做一定的处理，比如可以实现日志过滤器、验证过滤器、压缩和加密过滤器、错误处理过滤器。</li>
+<li>过滤器链：<img src="https://img.mukewang.com/57df77ac0001e7d912800720.jpg" alt="image"></li>
+<li>过滤器可以有两种映射模式，分别为URL模式和Servlet模式</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;context-param&gt;</div><div class="line">    &lt;param-name&gt;log4jConfigLocation&lt;/param-name&gt;</div><div class="line">    &lt;param-value&gt;/WEB-INF/resources/log4j.properties&lt;/param-value&gt;</div><div class="line">&lt;/context-param&gt;</div><div class="line">&lt;listener&gt;</div><div class="line">    &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;</div><div class="line">&lt;/listener&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>URL模式就是映射url,比如”/foo/abc”</li>
+<li>Servlet模式就是映射到某一个Servlet上，比如””MyServlet”</li>
+<li>URL模式的优先级高于Servlet模式</li>
+</ul>
 <ol>
-<li>增加log4j.properties文件</li>
+<li>过滤器的dispatcher方式，REQUEST(普通请求),FORWARD(转发请求),INCLUDE(包含请求),ERROR(错误资源请求),ASYNC(异步请求)</li>
+<li>Filter的xml配置方式：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># Root logger option</div><div class="line">log4j.rootLogger=DEBUG, stdout, file</div><div class="line"></div><div class="line"># Redirect log messages to console</div><div class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.Target=System.out</div><div class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</div><div class="line"></div><div class="line"># Redirect log messages to a log file</div><div class="line">log4j.appender.file=org.apache.log4j.RollingFileAppender</div><div class="line">#outputs to Tomcat home</div><div class="line">log4j.appender.file.File=$&#123;catalina.home&#125;/logs/myapp.log</div><div class="line">log4j.appender.file.MaxFileSize=5MB</div><div class="line">log4j.appender.file.MaxBackupIndex=10</div><div class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;MyFilter&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;org.rafa.MyFilter&lt;/filter-class&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line"></div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;myFilter&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/rafa&lt;/url-pattern&gt;</div><div class="line">    &lt;url-pattern&gt;/xxx/*&lt;/url-pattern&gt;</div><div class="line">    &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;</div><div class="line">    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;</div><div class="line">    &lt;dispatcher&gt;ASYNC&lt;/dispatcher&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>Filter的注解方式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@WebFilter(</div><div class="line">    filterName = &quot;myFilter&quot;,</div><div class="line">    urlPatterns = &#123;&quot;rafa&quot;,&quot;xxx/*&quot;&#125;,</div><div class="line">    servletNames = &#123;&quot;myServlet&quot;&#125;,</div><div class="line">    dispatcherTypes = &#123;DispatcherType.REQUEST,DispatcherType.ASYNC&#125;</div><div class="line">)</div><div class="line">pubblic class MyFilter implements Filter</div></pre></td></tr></table></figure>
+<ol>
+<li>Filter的代码方式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@WebListener</div><div class="line">public class Configurator implements ServletContextListener</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void contextInitialized(ServletContextEvent event)</div><div class="line">    &#123;</div><div class="line">        ServletContext context = event.getServletContext();</div><div class="line"></div><div class="line">        FilterRegistration.Dynamic registration =</div><div class="line">                context.addFilter(&quot;myFilter&quot;, new MyFilter());</div><div class="line">        registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST,DispatcherType.ASYNC), false, &quot;/xxx/*&quot;,&quot;/rafa&quot;);</div><div class="line">        registration.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST,DispatcherType.ASYNC),false,&quot;myServlet&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>Filter的异步请求，异步请求处理的关键在于：Servlet的service方法可以在响应发送到客户端之前返回。然后请求处理将被委托到另外一个线程或者基于某些事件完成。</p>
+</li>
+<li><p>用filter实现日志记录的简单例子<br>（记录每一条请求信息——IP地址，时间戳，请求方法，协议，响应状态和长度以及处理请求的时间）</p>
+</li>
+</ol>
+<hr>
+<p>RequestLogFilter.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public class RequestLogFilter implements Filter</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void doFilter(ServletRequest request, ServletResponse response,</div><div class="line">                         FilterChain chain) throws IOException, ServletException</div><div class="line">    &#123;</div><div class="line">        Instant time = Instant.now();</div><div class="line">        StopWatch timer = new StopWatch();</div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            timer.start();</div><div class="line">            chain.doFilter(request, response);</div><div class="line">        &#125;</div><div class="line">        finally</div><div class="line">        &#123;</div><div class="line">            timer.stop();</div><div class="line">            HttpServletRequest in = (HttpServletRequest)request;</div><div class="line">            HttpServletResponse out = (HttpServletResponse)response;</div><div class="line">            String length = out.getHeader(&quot;Content-Length&quot;);</div><div class="line">            if(length == null || length.length() == 0)</div><div class="line">                length = &quot;-&quot;;</div><div class="line">            System.out.println(in.getRemoteAddr() + &quot; - - [&quot; + time + &quot;]&quot; +</div><div class="line">                    &quot; \&quot;&quot; + in.getMethod() + &quot; &quot; + in.getRequestURI() + &quot; &quot; +</div><div class="line">                    in.getProtocol() + &quot;\&quot; &quot; + out.getStatus() + &quot; &quot; + length +</div><div class="line">                    &quot; &quot; + timer);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123; &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void destroy() &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Configurator.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@WebListener</div><div class="line">public class Configurator implements ServletContextListener</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void contextInitialized(ServletContextEvent event)</div><div class="line">    &#123;</div><div class="line">        ServletContext context = event.getServletContext();</div><div class="line"></div><div class="line">        FilterRegistration.Dynamic registration =</div><div class="line">                context.addFilter(&quot;requestLogFilter&quot;, new RequestLogFilter());</div><div class="line">        registration.addMappingForUrlPatterns(null, false, &quot;/*&quot;);</div><div class="line"></div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void contextDestroyed(ServletContextEvent event) &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>同时，在filter中也可以实现简单的用户登录或者权限验证</li>
+</ol>
+<p>Configurator.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@WebListener</div><div class="line">public class Configurator implements ServletContextListener</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void contextInitialized(ServletContextEvent event)</div><div class="line">    &#123;</div><div class="line">        ServletContext context = event.getServletContext();</div><div class="line"></div><div class="line">        FilterRegistration.Dynamic registration = context.addFilter(</div><div class="line">                &quot;authenticationFilter&quot;, new AuthenticationFilter()</div><div class="line">        );</div><div class="line">        registration.setAsyncSupported(true);</div><div class="line">        registration.addMappingForUrlPatterns(</div><div class="line">                null, false, &quot;/tickets&quot;, &quot;/sessions&quot;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void contextDestroyed(ServletContextEvent event) &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>AuthenticationFilter.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class AuthenticationFilter implements Filter</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void doFilter(ServletRequest request, ServletResponse response,</div><div class="line">                         FilterChain chain) throws IOException, ServletException</div><div class="line">    &#123;</div><div class="line">        HttpSession session = ((HttpServletRequest)request).getSession(false);</div><div class="line">        if(session == null || session.getAttribute(&quot;username&quot;) == null)</div><div class="line">            ((HttpServletResponse)response).sendRedirect(&quot;login&quot;);</div><div class="line">        else</div><div class="line">            chain.doFilter(request, response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void init(FilterConfig config) throws ServletException &#123; &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void destroy() &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -389,7 +814,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/2017-07-04/">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2018/03/13/javaweb高级编程学习笔记-/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rafa">
@@ -408,7 +833,131 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/27/2017-07-04/" itemprop="url">2017-07-04笔记</a></h1>
+                <a class="post-title-link" href="/2018/03/13/javaweb高级编程学习笔记-/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T12:42:06Z">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="利用HttpServletResponseWrapper修改Response对象"><a href="#利用HttpServletResponseWrapper修改Response对象" class="headerlink" title="利用HttpServletResponseWrapper修改Response对象"></a>利用HttpServletResponseWrapper修改Response对象</h3><p>有时我们可能需要从HttpServletResponse读取输出流，并对输出流做一些修改，但是如果我们直接对原始response进行操作则会造成输出流提前打开或者关闭，导致不能从一次请求中完成对输出流的修改。</p>
+<p>所以我们可以通过继承HttpServletResponseWrapper对象来获取原始的输出流，通过PrintWriter将输出流写入到Buffer中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public class ResponseWrapper extends HttpServletResponseWrapper &#123;</div><div class="line">    private PrintWriter cachedWriter;</div><div class="line">    private CharArrayWriter bufferedWriter;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Constructs a response adaptor wrapping the given response.</div><div class="line">     *</div><div class="line">     * @param response The response to be wrapped</div><div class="line">     * @throws IllegalArgumentException if the response is null</div><div class="line">     */</div><div class="line">    public ResponseWrapper(HttpServletResponse response) &#123;</div><div class="line">        super(response);</div><div class="line">        bufferedWriter = new CharArrayWriter();</div><div class="line">        cachedWriter = new PrintWriter(bufferedWriter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public PrintWriter getWriter() throws IOException &#123;</div><div class="line">        return cachedWriter;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获取原始HTML</div><div class="line">     *</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public String getResult() &#123;</div><div class="line">        byte[] bytes = bufferedWriter.toString().getBytes();</div><div class="line">        try &#123;</div><div class="line">            return new String(bytes, &quot;UTF-8&quot;);</div><div class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</div><div class="line">            return &quot;&quot;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过过滤器拦截Response对象，然后就可以对输出流进行操作了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class ResponseFilter implements Filter &#123;</div><div class="line">    @Override</div><div class="line">    public void init(javax.servlet.FilterConfig filterConfig) throws ServletException &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;</div><div class="line">        ResponseWrapper wrapper = new ResponseWrapper((HttpServletResponse) response);</div><div class="line">        chain.doFilter(request, wrapper);</div><div class="line">        String result = wrapper.getResult();</div><div class="line">        response.getOutputStream().write(result.getBytes());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void destroy() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/bootstrap-table使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/bootstrap-table使用/" itemprop="url">2017-07-02笔记</a></h1>
         
 
         <div class="post-meta">
@@ -460,491 +1009,11 @@
       
         
           
-            <h5 id="bootstrap-datetimepicker的使用"><a href="#bootstrap-datetimepicker的使用" class="headerlink" title="bootstrap-datetimepicker的使用"></a>bootstrap-datetimepicker的使用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&apos;input-group date&apos;&gt;</div><div class="line">	&lt;label class=&quot;input-group-addon&quot;&gt;开始日期&lt;/label&gt;</div><div class="line">	&lt;input type=&apos;text&apos; class=&quot;form-control&quot; id=&quot;beginDate&quot; /&gt;</div><div class="line">	&lt;span class=&quot;input-group-addon&quot;&gt;  </div><div class="line">        &lt;span class=&quot;glyphicon glyphicon-calendar&quot;&gt;&lt;/span&gt;</div><div class="line">	&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">$(&quot;.date&quot;).datepicker(&#123;</div><div class="line">	format: &quot;yyyy-mm-dd&quot;,</div><div class="line">	autoclose: &apos;true&apos;,</div><div class="line">	todayBtn: &apos;linked&apos;,</div><div class="line">	language: &apos;zh-CN&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h5 id="bootstrap-table刷新按钮"><a href="#bootstrap-table刷新按钮" class="headerlink" title="bootstrap-table刷新按钮"></a>bootstrap-table刷新按钮</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$(&apos;#table&apos;).bootstrapTable(&#123;</div><div class="line">	url:&apos;sendApplyQuery/groupByDate&apos;,</div><div class="line">	height:&apos;550&apos;,</div><div class="line">	sidePagination:&apos;server&apos;,</div><div class="line">	pagination:&apos;true&apos;,</div><div class="line">	pageList:&apos;[5, 10, 20, 50, 100, 200]&apos;,</div><div class="line">	toolbar:&apos;#toolbar&apos;,</div><div class="line">	striped:&apos;true&apos;,</div><div class="line">	showFooter:&apos;true&apos;,</div><div class="line">	queryParamsType:&apos;limit&apos;,</div><div class="line">	queryParams: function (params) &#123;</div><div class="line">    return &#123;</div><div class="line">            limit: params.limit,</div><div class="line">            offset: params.offset,</div><div class="line">            search: params.search,</div><div class="line">            order: params.sortOrder,</div><div class="line">            sort:params.sort,</div><div class="line">            begindate:$(&apos;#beginDate&apos;).val(),</div><div class="line">            enddate:$(&apos;#endDate&apos;).val()</div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line">	columns:[[&#123;field:&apos;username&apos;,title:&apos;日期&apos;,footerFormatter:totalTextFormatter&#125;,</div><div class="line">			&#123;field:&apos;normal&apos;,title:&apos;正常&apos;,footerFormatter:sumFormatter&#125;,</div><div class="line">			&#123;field:&apos;error&apos;,title:&apos;异常&apos;,footerFormatter:sumFormatter&#125;,</div><div class="line">			&#123;field:&apos;count&apos;,title:&apos;合计&apos;,footerFormatter:sumFormatter&#125;]]</div><div class="line">&#125;)</div><div class="line"></div><div class="line">$(&apos;#btnRefresh&apos;).click(function()&#123;</div><div class="line">	$(&apos;#table&apos;).bootstrapTable(&apos;refresh&apos;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h5 id="d3折线图"><a href="#d3折线图" class="headerlink" title="d3折线图"></a>d3折线图</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">        &lt;title&gt;折线图&lt;/title&gt;</div><div class="line">        &lt;style&gt;</div><div class="line">            .container &#123;</div><div class="line">                margin: 30px auto;</div><div class="line">                width: 600px;</div><div class="line">                height: 300px;</div><div class="line">                border: 1px solid #000;</div><div class="line">            &#125;</div><div class="line">            .axis path,</div><div class="line">            .axis line,</div><div class="line">            .line &#123;</div><div class="line">                stroke: #000;</div><div class="line">                fill: none;</div><div class="line">            &#125;</div><div class="line">        &lt;/style&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div class=&quot;container&quot;&gt;</div><div class="line">            &lt;svg width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;/svg&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;script src=&quot;http://d3js.org/d3.v3.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">            window.onload = function() &#123;</div><div class="line">                var width = 600, height = 300;</div><div class="line">                // SVG画布边缘与图表内容的距离</div><div class="line">                var padding = &#123; top: 50, right: 50, bottom: 50, left: 50 &#125;;</div><div class="line">                // 创建一个分组用来组合要画的图表元素</div><div class="line">                var main = d3.select(&apos;.container svg&apos;).append(&apos;g&apos;)</div><div class="line">                        .classed(&apos;main&apos;, true)</div><div class="line">                        .attr(&apos;transform&apos;, &quot;translate(&quot; + padding.top + &apos;,&apos; + padding.left + &apos;)&apos;);</div><div class="line">                // 模拟数据</div><div class="line">                </div><div class="line">                // 创建x轴的比例尺(线性比例尺)</div><div class="line">                var now = new Date();</div><div class="line">                var day = now.getDate();</div><div class="line">                var month = now.getMonth()+1;</div><div class="line">                </div><div class="line">                var xarray = [];</div><div class="line">                for(var i=1;i&lt;=day;i++)&#123;</div><div class="line">                	xarray.push(&#123;value:Math.random()*10,time:now.getFullYear()+&apos;-&apos;+month+&apos;-&apos;+i&#125;);</div><div class="line">                &#125;</div><div class="line">                console.log(xarray);</div><div class="line">                var parseDate = d3.time.format(&quot;%Y-%m-%d&quot;).parse;</div><div class="line">                var xScale= d3.time.scale().domain(d3.extent(xarray,function(d)&#123;</div><div class="line">                	return parseDate(d.time);</div><div class="line">                &#125;)).range([0, width- padding.left - padding.right]);</div><div class="line">                </div><div class="line">                /*</div><div class="line">                var xScale = d3.scale.linear()</div><div class="line">                        .domain(d3.extent(xarray, function(d) &#123;</div><div class="line">                            return d;</div><div class="line">                        &#125;))</div><div class="line">                        .range([0, width - padding.left - padding.right]);</div><div class="line">                */</div><div class="line">                // 创建y轴的比例尺(线性比例尺)</div><div class="line">                var yScale = d3.scale.linear()</div><div class="line">                        .domain([0, d3.max(xarray,function(d) &#123;</div><div class="line">                            return d.value;</div><div class="line">                        &#125;)])</div><div class="line">                        .range([height - padding.top - padding.bottom, 0]);</div><div class="line">                // 创建x轴</div><div class="line">                var xAxis = d3.svg.axis()</div><div class="line">              .scale(xScale)</div><div class="line">             .orient(&quot;bottom&quot;).ticks(4)</div><div class="line">             .tickFormat(d3.time.format(&quot;%m.%d&quot;));</div><div class="line">                // 创建y轴</div><div class="line">                var yAxis = d3.svg.axis()</div><div class="line">                        .scale(yScale)</div><div class="line">                        .orient(&apos;left&apos;);</div><div class="line">                // 添加SVG元素并与x轴进行“绑定”</div><div class="line">                main.append(&apos;g&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;axis&apos;)</div><div class="line">                        .attr(&apos;transform&apos;, &apos;translate(0,&apos; + (height - padding.top - padding.bottom) + &apos;)&apos;)</div><div class="line">                        .call(xAxis);</div><div class="line">                // 添加SVG元素并与y轴进行“绑定”</div><div class="line">                main.append(&apos;g&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;axis&apos;)</div><div class="line">                        .call(yAxis);</div><div class="line">                // 添加折线   把坐标画成折线的函数</div><div class="line">                </div><div class="line">                var line = d3.svg.line()</div><div class="line">                        .x(function(d) &#123;</div><div class="line">                        	</div><div class="line">                            return xScale(parseDate(d.time))</div><div class="line">                        &#125;)</div><div class="line">                        .y(function(d) &#123;</div><div class="line">                            return yScale(d.value);</div><div class="line">                        &#125;)</div><div class="line">                    // 选择线条的类型</div><div class="line">                        .interpolate(&apos;linear&apos;);</div><div class="line">                // 添加path元素，并通过line()计算出值来赋值</div><div class="line">                console.log(line(xarray));</div><div class="line">                main.append(&apos;path&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;line&apos;)</div><div class="line">                        .attr(&apos;d&apos;, line(xarray));</div><div class="line">                // 添加点</div><div class="line">                main.selectAll(&apos;circle&apos;)</div><div class="line">                        .data(xarray)</div><div class="line">                        .enter()</div><div class="line">                        .append(&apos;circle&apos;)</div><div class="line">                        .attr(&apos;cx&apos;, function(d) &#123;</div><div class="line">                            return xScale(parseDate(d.time));</div><div class="line">                        &#125;)</div><div class="line">                        .attr(&apos;cy&apos;, function(d) &#123;</div><div class="line">                            return yScale(d.value);</div><div class="line">                        &#125;)</div><div class="line">                        .attr(&apos;r&apos;, 5)</div><div class="line">                        .attr(&apos;fill&apos;, function(d, i) &#123;</div><div class="line">                            return getColor(i);</div><div class="line">                        &#125;);</div><div class="line">                </div><div class="line">            &#125;;</div><div class="line">            function getColor(idx) &#123;</div><div class="line">                var palette = [</div><div class="line">                    &apos;#2ec7c9&apos;, &apos;#b6a2de&apos;, &apos;#5ab1ef&apos;, &apos;#ffb980&apos;, &apos;#d87a80&apos;,</div><div class="line">                    &apos;#8d98b3&apos;, &apos;#e5cf0d&apos;, &apos;#97b552&apos;, &apos;#95706d&apos;, &apos;#dc69aa&apos;,</div><div class="line">                    &apos;#07a2a4&apos;, &apos;#9a7fd1&apos;, &apos;#588dd5&apos;, &apos;#f5994e&apos;, &apos;#c05050&apos;,</div><div class="line">                    &apos;#59678c&apos;, &apos;#c9ab00&apos;, &apos;#7eb00a&apos;, &apos;#6f5553&apos;, &apos;#c14089&apos;</div><div class="line">                ]</div><div class="line">                return palette[idx % palette.length];</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            function formatdate(val)&#123;</div><div class="line">				if (val&lt;10)&#123;</div><div class="line">					return &apos;0&apos;+val;</div><div class="line">				&#125;</div><div class="line">				else&#123;</div><div class="line">					return val;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/2017-06-30/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/2017-06-30/" itemprop="url">2017-07-01</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h6 id="jquery-checkbox反复调用attr-‘checked’-true-false-只有第一次生效的解决办法"><a href="#jquery-checkbox反复调用attr-‘checked’-true-false-只有第一次生效的解决办法" class="headerlink" title="jquery checkbox反复调用attr(‘checked’, true/false)只有第一次生效的解决办法:"></a>jquery checkbox反复调用attr(‘checked’, true/false)只有第一次生效的解决办法:</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;input[name=ids]&quot;).prop(&quot;checked&quot;, true);</div></pre></td></tr></table></figure>
-<h6 id="jquery的keypress事件"><a href="#jquery的keypress事件" class="headerlink" title="jquery的keypress事件"></a>jquery的keypress事件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$( &quot;#target&quot; ).keypress(function( event ) &#123;</div><div class="line">  if ( event.which == 13 ) &#123;</div><div class="line">     event.preventDefault();</div><div class="line">  &#125;</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
-<h6 id="打开指定qq号的聊天窗体"><a href="#打开指定qq号的聊天窗体" class="headerlink" title="打开指定qq号的聊天窗体"></a>打开指定qq号的聊天窗体</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">window.open(&quot;tencent://message/?uin=412751211&quot;);</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/vue 手动路由跳转/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/vue 手动路由跳转/" itemprop="url">vue 手动路由跳转</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.$router.push(&#123;path:&apos;/&apos;&#125;);</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/myeclipse10 导出war包出错/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/myeclipse10 导出war包出错/" itemprop="url">myeclipse10 导出war包出错</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://blog.csdn.net/ibooks/article/details/47948291" target="_blank" rel="external">http://blog.csdn.net/ibooks/article/details/47948291</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/2017-07-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/2017-07-11/" itemprop="url">2017-07-11笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h5 id="获取request里面的参数"><a href="#获取request里面的参数" class="headerlink" title="获取request里面的参数"></a>获取request里面的参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">InputStream inputStream ;  </div><div class="line">StringBuffer sb = new StringBuffer();  </div><div class="line">inputStream = request.getInputStream();  </div><div class="line">String s ;  </div><div class="line">BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, &quot;UTF-8&quot;));  </div><div class="line">while ((s = in.readLine()) != null)&#123;  </div><div class="line">    sb.append(s);  </div><div class="line">&#125;  </div><div class="line">in.close();</div></pre></td></tr></table></figure>
+            <h1 id="bootstrap-table使用"><a href="#bootstrap-table使用" class="headerlink" title="bootstrap-table使用"></a>bootstrap-table使用</h1><h5 id="服务端请求格式"><a href="#服务端请求格式" class="headerlink" title="服务端请求格式"></a>服务端请求格式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">search:22222</div><div class="line">order:asc</div><div class="line">offset:0</div><div class="line">limit:10</div></pre></td></tr></table></figure>
+<h5 id="服务端返回数据格式"><a href="#服务端返回数据格式" class="headerlink" title="服务端返回数据格式"></a>服务端返回数据格式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;total: 8,row:[]&#125;</div></pre></td></tr></table></figure>
+<h5 id="合计"><a href="#合计" class="headerlink" title="合计"></a>合计</h5><p>table<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data-show-footer = &quot;true&quot;</div></pre></td></tr></table></figure></p>
+<p>th</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;th data-field=&quot;username&quot; data-footer-formatter=&quot;totalTextFormatter&quot;&gt;用户名&lt;/th&gt;</div><div class="line">&lt;th data-field=&quot;count&quot; data-footer-formatter=&quot;sumFormatter&quot;&gt;合计&lt;/th&gt;</div><div class="line"></div><div class="line">function totalTextFormatter(data) &#123;</div><div class="line">        return &apos;合计&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">function sumFormatter(data) &#123;</div><div class="line">    field = this.field;</div><div class="line">    var total_sum = data.reduce(function(sum, row) &#123;</div><div class="line">        return (sum) + (row[field] || 0);</div><div class="line">    &#125;, 0);</div><div class="line">    return total_sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1113,253 +1182,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/使用log4j/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/使用log4j/" itemprop="url">使用log4j</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.添加dependency</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.7.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<p>2.添加log4j.properties配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#config root logger</div><div class="line">log4j.rootLogger = INFO,system.out  </div><div class="line">log4j.appender.system.out=org.apache.log4j.ConsoleAppender  </div><div class="line">log4j.appender.system.out.layout=org.apache.log4j.PatternLayout  </div><div class="line">log4j.appender.system.out.layout.ConversionPattern=MINAServer Logger--&gt;%5p&#123;%F:%L&#125;-%m%n  </div><div class="line"></div><div class="line">#config this Project.file logger</div><div class="line">log4j.logger.thisProject.file=INFO,thisProject.file.out  </div><div class="line">log4j.appender.thisProject.file.out=org.apache.log4j.DailyRollingFileAppender  </div><div class="line">log4j.appender.thisProject.file.out.File=logContentFile.log  </div><div class="line">log4j.appender.thisProject.file.out.layout=org.apache.log4j.PatternLayout</div></pre></td></tr></table></figure>
-<p>3.调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Hello &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Logger logger = LoggerFactory.getLogger(Hello.class);</div><div class="line">        logger.info(&quot;Hello World&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springboot 属性配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/springboot 属性配置/" itemprop="url">springboot 属性配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">foo:</div><div class="line">    remote-address: 192.168.1.1</div><div class="line">    security:</div><div class="line">        username: foo</div><div class="line">        roles:</div><div class="line">          - USER</div><div class="line">          - ADMIN</div></pre></td></tr></table></figure>
-<h3 id="FooProperties-java"><a href="#FooProperties-java" class="headerlink" title="FooProperties.java"></a>FooProperties.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">@ConfigurationProperties(&quot;foo&quot;)</div><div class="line">public class FooProperties &#123;</div><div class="line">    private boolean enabled;</div><div class="line"></div><div class="line">    private InetAddress remoteAddress;</div><div class="line"></div><div class="line">    public boolean isEnabled() &#123;</div><div class="line">        return enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEnabled(boolean enabled) &#123;</div><div class="line">        this.enabled = enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public InetAddress getRemoteAddress() &#123;</div><div class="line">        return remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setRemoteAddress(InetAddress remoteAddress) &#123;</div><div class="line">        this.remoteAddress = remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Security getSecurity() &#123;</div><div class="line">        return security;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private final Security security = new Security();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    public static class Security &#123;</div><div class="line"></div><div class="line">        private String username;</div><div class="line"></div><div class="line">        public String getUsername() &#123;</div><div class="line">            return username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setUsername(String username) &#123;</div><div class="line">            this.username = username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public String getPassword() &#123;</div><div class="line">            return password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setPassword(String password) &#123;</div><div class="line">            this.password = password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public List&lt;String&gt; getRoles() &#123;</div><div class="line">            return roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setRoles(List&lt;String&gt; roles) &#123;</div><div class="line">            this.roles = roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private String password;</div><div class="line"></div><div class="line">        private List&lt;String&gt; roles = new ArrayList&lt;&gt;(Collections.singleton(&quot;USER&quot;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">public class Application implements EmbeddedServletContainerCustomizer, CommandLineRunner &#123;</div><div class="line">    @Autowired</div><div class="line">    private FooProperties properties;</div><div class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        SpringApplication.run(Application.class, args);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void customize(ConfigurableEmbeddedServletContainer container) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        container.setPort(7777);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void run(String... strings) throws Exception &#123;</div><div class="line">        logger.info(properties.getRemoteAddress().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/mysql配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1473,6 +1295,247 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/js直接打印pdf内容/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/js直接打印pdf内容/" itemprop="url">2017-07-01笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h6 id="js直接打印pdf内容"><a href="#js直接打印pdf内容" class="headerlink" title="js直接打印pdf内容"></a>js直接打印pdf内容</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;iframe style=&quot;display:none&quot; id=&quot;printIframe&quot; src=&quot;&lt;%=data%&gt;&quot;&gt;&lt;/iframe&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(document).ready(function()&#123;</div><div class="line">          doPrint();</div><div class="line"> </div><div class="line">&#125;);</div><div class="line">//点击打印按钮，触发事件】</div><div class="line">function doPrint()&#123;</div><div class="line">    $(&quot;#printIframe&quot;)[0].contentWindow.print();</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h6 id="springboot-获取静态资源文件"><a href="#springboot-获取静态资源文件" class="headerlink" title="springboot 获取静态资源文件"></a>springboot 获取静态资源文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private final ResourceLoader resourceLoader; </div><div class="line">	 @Autowired</div><div class="line">	 public FileUploadController(ResourceLoader resourceLoader) &#123; </div><div class="line">	 this.resourceLoader = resourceLoader; </div><div class="line">	 &#125; </div><div class="line">	 </div><div class="line">//显示图片的方法关键 匹配路径像 localhost:8080/b7c76eb3-5a67-4d41-ae5c-1642af3f8746.png </div><div class="line">	 @RequestMapping(method = RequestMethod.GET, value = &quot;/getfile/&#123;filename:.+&#125;&quot;) </div><div class="line">	 @ResponseBody</div><div class="line">	 public ResponseEntity&lt;?&gt; getFile(@PathVariable String filename) &#123; </div><div class="line">	  </div><div class="line">	 try &#123; </div><div class="line">	  return ResponseEntity.ok(resourceLoader.getResource(&quot;file:&quot; + &quot;src\\main\\resources\\static\\uploadFiles\\&quot;+filename)); </div><div class="line">	 &#125; catch (Exception e) &#123; </div><div class="line">	  return ResponseEntity.notFound().build(); </div><div class="line">	 &#125; </div><div class="line">	 &#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/myeclipse10 导出war包出错/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/myeclipse10 导出war包出错/" itemprop="url">myeclipse10 导出war包出错</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://blog.csdn.net/ibooks/article/details/47948291" target="_blank" rel="external">http://blog.csdn.net/ibooks/article/details/47948291</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1523,12 +1586,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
           
 
           
