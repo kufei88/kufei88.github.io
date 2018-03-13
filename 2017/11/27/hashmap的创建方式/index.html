@@ -94,16 +94,16 @@
 
 
 
-<meta name="description" content="application.yml1234567foo:    remote-address: 192.168.1.1    security:        username: foo        roles:          - USER          - ADMIN FooProperties.java1234567891011121314151617181920212223242526">
+<meta name="description" content="hashmap的创建方式1Map&amp;lt;String,String&amp;gt; map = HashMap.newInstance();">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot 属性配置">
-<meta property="og:url" content="https://kufei88.github.io/2017/11/27/springboot 属性配置/index.html">
+<meta property="og:title" content="2017-07-17笔记">
+<meta property="og:url" content="https://kufei88.github.io/2017/11/27/hashmap的创建方式/index.html">
 <meta property="og:site_name" content="Rafa&#39;s Blog">
-<meta property="og:description" content="application.yml1234567foo:    remote-address: 192.168.1.1    security:        username: foo        roles:          - USER          - ADMIN FooProperties.java1234567891011121314151617181920212223242526">
-<meta property="og:updated_time" content="2017-11-26T13:57:41.940Z">
+<meta property="og:description" content="hashmap的创建方式1Map&amp;lt;String,String&amp;gt; map = HashMap.newInstance();">
+<meta property="og:updated_time" content="2018-03-13T12:42:24.481Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot 属性配置">
-<meta name="twitter:description" content="application.yml1234567foo:    remote-address: 192.168.1.1    security:        username: foo        roles:          - USER          - ADMIN FooProperties.java1234567891011121314151617181920212223242526">
+<meta name="twitter:title" content="2017-07-17笔记">
+<meta name="twitter:description" content="hashmap的创建方式1Map&amp;lt;String,String&amp;gt; map = HashMap.newInstance();">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://kufei88.github.io/2017/11/27/springboot 属性配置/"/>
+  <link rel="canonical" href="https://kufei88.github.io/2017/11/27/hashmap的创建方式/"/>
 
 
 
 
 
-  <title>springboot 属性配置 | Rafa's Blog</title>
+  <title>2017-07-17笔记 | Rafa's Blog</title>
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springboot 属性配置/">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/hashmap的创建方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rafa">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">springboot 属性配置</h1>
+          <h1 class="post-title" itemprop="name headline">2017-07-17笔记</h1>
         
 
         <div class="post-meta">
@@ -290,7 +290,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T05:34:49+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
                 2017-11-26
               </time>
             
@@ -328,9 +328,7 @@
       
 
       
-        <h3 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">foo:</div><div class="line">    remote-address: 192.168.1.1</div><div class="line">    security:</div><div class="line">        username: foo</div><div class="line">        roles:</div><div class="line">          - USER</div><div class="line">          - ADMIN</div></pre></td></tr></table></figure>
-<h3 id="FooProperties-java"><a href="#FooProperties-java" class="headerlink" title="FooProperties.java"></a>FooProperties.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">@ConfigurationProperties(&quot;foo&quot;)</div><div class="line">public class FooProperties &#123;</div><div class="line">    private boolean enabled;</div><div class="line"></div><div class="line">    private InetAddress remoteAddress;</div><div class="line"></div><div class="line">    public boolean isEnabled() &#123;</div><div class="line">        return enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEnabled(boolean enabled) &#123;</div><div class="line">        this.enabled = enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public InetAddress getRemoteAddress() &#123;</div><div class="line">        return remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setRemoteAddress(InetAddress remoteAddress) &#123;</div><div class="line">        this.remoteAddress = remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Security getSecurity() &#123;</div><div class="line">        return security;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private final Security security = new Security();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    public static class Security &#123;</div><div class="line"></div><div class="line">        private String username;</div><div class="line"></div><div class="line">        public String getUsername() &#123;</div><div class="line">            return username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setUsername(String username) &#123;</div><div class="line">            this.username = username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public String getPassword() &#123;</div><div class="line">            return password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setPassword(String password) &#123;</div><div class="line">            this.password = password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public List&lt;String&gt; getRoles() &#123;</div><div class="line">            return roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setRoles(List&lt;String&gt; roles) &#123;</div><div class="line">            this.roles = roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private String password;</div><div class="line"></div><div class="line">        private List&lt;String&gt; roles = new ArrayList&lt;&gt;(Collections.singleton(&quot;USER&quot;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">public class Application implements EmbeddedServletContainerCustomizer, CommandLineRunner &#123;</div><div class="line">    @Autowired</div><div class="line">    private FooProperties properties;</div><div class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        SpringApplication.run(Application.class, args);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void customize(ConfigurableEmbeddedServletContainer container) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        container.setPort(7777);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void run(String... strings) throws Exception &#123;</div><div class="line">        logger.info(properties.getRemoteAddress().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h3 id="hashmap的创建方式"><a href="#hashmap的创建方式" class="headerlink" title="hashmap的创建方式"></a>hashmap的创建方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String,String&gt; map = HashMap.newInstance();</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -355,8 +353,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/27/使用log4j/" rel="next" title="使用log4j">
-                <i class="fa fa-chevron-left"></i> 使用log4j
+              <a href="/2017/11/27/打开指定qq号的聊天窗体/" rel="next" title="2017-07-01">
+                <i class="fa fa-chevron-left"></i> 2017-07-01
               </a>
             
           </div>
@@ -365,8 +363,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/27/springboot 配置转换成实体类/" rel="prev" title="springboot 配置转换成实体类">
-                springboot 配置转换成实体类 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/27/安装chocolatey出错/" rel="prev" title="2017-08-01笔记">
+                2017-08-01笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -492,7 +490,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#application-yml"><span class="nav-number">1.</span> <span class="nav-text">application.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FooProperties-java"><span class="nav-number">2.</span> <span class="nav-text">FooProperties.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application"><span class="nav-number">3.</span> <span class="nav-text">Application</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashmap的创建方式"><span class="nav-number">1.</span> <span class="nav-text">hashmap的创建方式</span></a></li></ol></div>
             
 
           </div>
