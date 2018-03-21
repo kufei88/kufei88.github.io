@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/vue 手动路由跳转/">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/maven添加sqlserver的jdbc驱动包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rafa">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/27/vue 手动路由跳转/" itemprop="url">vue 手动路由跳转</a></h1>
+                <a class="post-title-link" href="/2017/11/27/maven添加sqlserver的jdbc驱动包/" itemprop="url">maven添加sqlserver的jdbc驱动包</a></h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
+                  <a href="/categories/maven实战笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">maven实战笔记</span>
                   </a>
                 </span>
 
@@ -355,7 +355,19 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.$router.push(&#123;path:&apos;/&apos;&#125;);</div></pre></td></tr></table></figure>
+            <p><a href="http://search.maven.org/中没有sqlserver的jdbc驱动，所以需要本地安装sqljdbc的jar包，然后再在pom里面引入" target="_blank" rel="external">http://search.maven.org/中没有sqlserver的jdbc驱动，所以需要本地安装sqljdbc的jar包，然后再在pom里面引入</a></p>
+<p>Step 1</p>
+<p>　　在微软官网下载sqljdbc的jar包：<a href="http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&amp;id=11774" target="_blank" rel="external">http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&amp;id=11774</a></p>
+<p>　　本次下载了4.0版本</p>
+<pre><code>空间下载连接分享:https://yunpan.cn/cv3TjJqDZM7zu  访问密码 d6bb
+</code></pre><p>Step 2</p>
+<p>　　通过maven命令将jar包安装到本地。</p>
+<p>　　在有sqljdbc4.jar包的文件夹下，通过shift+右键的方式–》此处打开命令窗口，然后执行以下maven命令</p>
+<p>　　　　mvn install:install-file -Dfile=sqljdbc4.jar -Dpackaging=jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0　　</p>
+<p>　　命令解释：mvn install:install-file -Dfile=”jar包的绝对路径” -Dpackaging=”文件打包方式” -DgroupId=groupid名 -DartifactId=artifactId名 -Dversion=jar版本 </p>
+<p>Step 3</p>
+<p>　　在pom.xml中引入本地jar包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;sqljdbc4&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
 
           
         
@@ -404,7 +416,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/bootstrap-datetimepicker的使用/">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/mybatis读取sqlserver中image类型字段/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rafa">
@@ -423,7 +435,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/27/bootstrap-datetimepicker的使用/" itemprop="url">bootstrap-datetimepicker的使用</a></h1>
+                <a class="post-title-link" href="/2017/11/27/mybatis读取sqlserver中image类型字段/" itemprop="url">mybatis读取sqlserver中image类型字段</a></h1>
         
 
         <div class="post-meta">
@@ -458,8 +470,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
+                  <a href="/categories/java笔记笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记笔记</span>
                   </a>
                 </span>
 
@@ -497,1041 +509,10 @@
       
         
           
-            <h5 id="bootstrap-datetimepicker的使用"><a href="#bootstrap-datetimepicker的使用" class="headerlink" title="bootstrap-datetimepicker的使用"></a>bootstrap-datetimepicker的使用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&apos;input-group date&apos;&gt;</div><div class="line">	&lt;label class=&quot;input-group-addon&quot;&gt;开始日期&lt;/label&gt;</div><div class="line">	&lt;input type=&apos;text&apos; class=&quot;form-control&quot; id=&quot;beginDate&quot; /&gt;</div><div class="line">	&lt;span class=&quot;input-group-addon&quot;&gt;  </div><div class="line">        &lt;span class=&quot;glyphicon glyphicon-calendar&quot;&gt;&lt;/span&gt;</div><div class="line">	&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">$(&quot;.date&quot;).datepicker(&#123;</div><div class="line">	format: &quot;yyyy-mm-dd&quot;,</div><div class="line">	autoclose: &apos;true&apos;,</div><div class="line">	todayBtn: &apos;linked&apos;,</div><div class="line">	language: &apos;zh-CN&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h5 id="bootstrap-table刷新按钮"><a href="#bootstrap-table刷新按钮" class="headerlink" title="bootstrap-table刷新按钮"></a>bootstrap-table刷新按钮</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$(&apos;#table&apos;).bootstrapTable(&#123;</div><div class="line">	url:&apos;sendApplyQuery/groupByDate&apos;,</div><div class="line">	height:&apos;550&apos;,</div><div class="line">	sidePagination:&apos;server&apos;,</div><div class="line">	pagination:&apos;true&apos;,</div><div class="line">	pageList:&apos;[5, 10, 20, 50, 100, 200]&apos;,</div><div class="line">	toolbar:&apos;#toolbar&apos;,</div><div class="line">	striped:&apos;true&apos;,</div><div class="line">	showFooter:&apos;true&apos;,</div><div class="line">	queryParamsType:&apos;limit&apos;,</div><div class="line">	queryParams: function (params) &#123;</div><div class="line">    return &#123;</div><div class="line">            limit: params.limit,</div><div class="line">            offset: params.offset,</div><div class="line">            search: params.search,</div><div class="line">            order: params.sortOrder,</div><div class="line">            sort:params.sort,</div><div class="line">            begindate:$(&apos;#beginDate&apos;).val(),</div><div class="line">            enddate:$(&apos;#endDate&apos;).val()</div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line">	columns:[[&#123;field:&apos;username&apos;,title:&apos;日期&apos;,footerFormatter:totalTextFormatter&#125;,</div><div class="line">			&#123;field:&apos;normal&apos;,title:&apos;正常&apos;,footerFormatter:sumFormatter&#125;,</div><div class="line">			&#123;field:&apos;error&apos;,title:&apos;异常&apos;,footerFormatter:sumFormatter&#125;,</div><div class="line">			&#123;field:&apos;count&apos;,title:&apos;合计&apos;,footerFormatter:sumFormatter&#125;]]</div><div class="line">&#125;)</div><div class="line"></div><div class="line">$(&apos;#btnRefresh&apos;).click(function()&#123;</div><div class="line">	$(&apos;#table&apos;).bootstrapTable(&apos;refresh&apos;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h5 id="d3折线图"><a href="#d3折线图" class="headerlink" title="d3折线图"></a>d3折线图</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">        &lt;title&gt;折线图&lt;/title&gt;</div><div class="line">        &lt;style&gt;</div><div class="line">            .container &#123;</div><div class="line">                margin: 30px auto;</div><div class="line">                width: 600px;</div><div class="line">                height: 300px;</div><div class="line">                border: 1px solid #000;</div><div class="line">            &#125;</div><div class="line">            .axis path,</div><div class="line">            .axis line,</div><div class="line">            .line &#123;</div><div class="line">                stroke: #000;</div><div class="line">                fill: none;</div><div class="line">            &#125;</div><div class="line">        &lt;/style&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div class=&quot;container&quot;&gt;</div><div class="line">            &lt;svg width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;/svg&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;script src=&quot;http://d3js.org/d3.v3.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">            window.onload = function() &#123;</div><div class="line">                var width = 600, height = 300;</div><div class="line">                // SVG画布边缘与图表内容的距离</div><div class="line">                var padding = &#123; top: 50, right: 50, bottom: 50, left: 50 &#125;;</div><div class="line">                // 创建一个分组用来组合要画的图表元素</div><div class="line">                var main = d3.select(&apos;.container svg&apos;).append(&apos;g&apos;)</div><div class="line">                        .classed(&apos;main&apos;, true)</div><div class="line">                        .attr(&apos;transform&apos;, &quot;translate(&quot; + padding.top + &apos;,&apos; + padding.left + &apos;)&apos;);</div><div class="line">                // 模拟数据</div><div class="line">                </div><div class="line">                // 创建x轴的比例尺(线性比例尺)</div><div class="line">                var now = new Date();</div><div class="line">                var day = now.getDate();</div><div class="line">                var month = now.getMonth()+1;</div><div class="line">                </div><div class="line">                var xarray = [];</div><div class="line">                for(var i=1;i&lt;=day;i++)&#123;</div><div class="line">                	xarray.push(&#123;value:Math.random()*10,time:now.getFullYear()+&apos;-&apos;+month+&apos;-&apos;+i&#125;);</div><div class="line">                &#125;</div><div class="line">                console.log(xarray);</div><div class="line">                var parseDate = d3.time.format(&quot;%Y-%m-%d&quot;).parse;</div><div class="line">                var xScale= d3.time.scale().domain(d3.extent(xarray,function(d)&#123;</div><div class="line">                	return parseDate(d.time);</div><div class="line">                &#125;)).range([0, width- padding.left - padding.right]);</div><div class="line">                </div><div class="line">                /*</div><div class="line">                var xScale = d3.scale.linear()</div><div class="line">                        .domain(d3.extent(xarray, function(d) &#123;</div><div class="line">                            return d;</div><div class="line">                        &#125;))</div><div class="line">                        .range([0, width - padding.left - padding.right]);</div><div class="line">                */</div><div class="line">                // 创建y轴的比例尺(线性比例尺)</div><div class="line">                var yScale = d3.scale.linear()</div><div class="line">                        .domain([0, d3.max(xarray,function(d) &#123;</div><div class="line">                            return d.value;</div><div class="line">                        &#125;)])</div><div class="line">                        .range([height - padding.top - padding.bottom, 0]);</div><div class="line">                // 创建x轴</div><div class="line">                var xAxis = d3.svg.axis()</div><div class="line">              .scale(xScale)</div><div class="line">             .orient(&quot;bottom&quot;).ticks(4)</div><div class="line">             .tickFormat(d3.time.format(&quot;%m.%d&quot;));</div><div class="line">                // 创建y轴</div><div class="line">                var yAxis = d3.svg.axis()</div><div class="line">                        .scale(yScale)</div><div class="line">                        .orient(&apos;left&apos;);</div><div class="line">                // 添加SVG元素并与x轴进行“绑定”</div><div class="line">                main.append(&apos;g&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;axis&apos;)</div><div class="line">                        .attr(&apos;transform&apos;, &apos;translate(0,&apos; + (height - padding.top - padding.bottom) + &apos;)&apos;)</div><div class="line">                        .call(xAxis);</div><div class="line">                // 添加SVG元素并与y轴进行“绑定”</div><div class="line">                main.append(&apos;g&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;axis&apos;)</div><div class="line">                        .call(yAxis);</div><div class="line">                // 添加折线   把坐标画成折线的函数</div><div class="line">                </div><div class="line">                var line = d3.svg.line()</div><div class="line">                        .x(function(d) &#123;</div><div class="line">                        	</div><div class="line">                            return xScale(parseDate(d.time))</div><div class="line">                        &#125;)</div><div class="line">                        .y(function(d) &#123;</div><div class="line">                            return yScale(d.value);</div><div class="line">                        &#125;)</div><div class="line">                    // 选择线条的类型</div><div class="line">                        .interpolate(&apos;linear&apos;);</div><div class="line">                // 添加path元素，并通过line()计算出值来赋值</div><div class="line">                console.log(line(xarray));</div><div class="line">                main.append(&apos;path&apos;)</div><div class="line">                        .attr(&apos;class&apos;, &apos;line&apos;)</div><div class="line">                        .attr(&apos;d&apos;, line(xarray));</div><div class="line">                // 添加点</div><div class="line">                main.selectAll(&apos;circle&apos;)</div><div class="line">                        .data(xarray)</div><div class="line">                        .enter()</div><div class="line">                        .append(&apos;circle&apos;)</div><div class="line">                        .attr(&apos;cx&apos;, function(d) &#123;</div><div class="line">                            return xScale(parseDate(d.time));</div><div class="line">                        &#125;)</div><div class="line">                        .attr(&apos;cy&apos;, function(d) &#123;</div><div class="line">                            return yScale(d.value);</div><div class="line">                        &#125;)</div><div class="line">                        .attr(&apos;r&apos;, 5)</div><div class="line">                        .attr(&apos;fill&apos;, function(d, i) &#123;</div><div class="line">                            return getColor(i);</div><div class="line">                        &#125;);</div><div class="line">                </div><div class="line">            &#125;;</div><div class="line">            function getColor(idx) &#123;</div><div class="line">                var palette = [</div><div class="line">                    &apos;#2ec7c9&apos;, &apos;#b6a2de&apos;, &apos;#5ab1ef&apos;, &apos;#ffb980&apos;, &apos;#d87a80&apos;,</div><div class="line">                    &apos;#8d98b3&apos;, &apos;#e5cf0d&apos;, &apos;#97b552&apos;, &apos;#95706d&apos;, &apos;#dc69aa&apos;,</div><div class="line">                    &apos;#07a2a4&apos;, &apos;#9a7fd1&apos;, &apos;#588dd5&apos;, &apos;#f5994e&apos;, &apos;#c05050&apos;,</div><div class="line">                    &apos;#59678c&apos;, &apos;#c9ab00&apos;, &apos;#7eb00a&apos;, &apos;#6f5553&apos;, &apos;#c14089&apos;</div><div class="line">                ]</div><div class="line">                return palette[idx % palette.length];</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            function formatdate(val)&#123;</div><div class="line">				if (val&lt;10)&#123;</div><div class="line">					return &apos;0&apos;+val;</div><div class="line">				&#125;</div><div class="line">				else&#123;</div><div class="line">					return val;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/checkbox的16进制表示/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/checkbox的16进制表示/" itemprop="url">checkbox的16进制表示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>☐ (hex: &#x2610; / dec: &#9744;): ballot box (empty, that ’ s how it ’ s supposed to be) </p>
-<p>☑ (hex: &#x2611; / dec: &#9745;): ballot box with check </p>
-<p>☒ (hex: &#x2612; / dec: &#9746;): ballot box with x </p>
-<p>✓ (hex: &#x2713; / dec: &#10003;): check mark, equivalent to &checkmark; and &check; in most browsers </p>
-<p>✔ (hex: &#x2714; / dec: &#10004;): heavy check mark </p>
-<p>✗ (hex: &#x2717; / dec: &#10007;): ballot x </p>
-<p>✘ (hex: &#x2718; / dec: &#10008;): heavy ballot x</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/hashmap的创建方式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/hashmap的创建方式/" itemprop="url">hashmap的创建方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">java笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="hashmap的创建方式"><a href="#hashmap的创建方式" class="headerlink" title="hashmap的创建方式"></a>hashmap的创建方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String,String&gt; map = HashMap.newInstance();</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/jquery操作select/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/jquery操作select/" itemprop="url">jquery操作select</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="获取当前选中项的text"><a href="#获取当前选中项的text" class="headerlink" title="获取当前选中项的text"></a>获取当前选中项的text</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;.selector&quot;).find(&quot;option:selected&quot;).text();</div></pre></td></tr></table></figure>
-<h3 id="设置text为pxx的项选中"><a href="#设置text为pxx的项选中" class="headerlink" title="设置text为pxx的项选中"></a>设置text为pxx的项选中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;.selector&quot;).find(&quot;option[text=&apos;pxx&apos;]&quot;).attr(&quot;selected&quot;,true);</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/bootstrap-table使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/bootstrap-table使用/" itemprop="url">bootstrap-table使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="bootstrap-table使用"><a href="#bootstrap-table使用" class="headerlink" title="bootstrap-table使用"></a>bootstrap-table使用</h1><h5 id="服务端请求格式"><a href="#服务端请求格式" class="headerlink" title="服务端请求格式"></a>服务端请求格式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">search:22222</div><div class="line">order:asc</div><div class="line">offset:0</div><div class="line">limit:10</div></pre></td></tr></table></figure>
-<h5 id="服务端返回数据格式"><a href="#服务端返回数据格式" class="headerlink" title="服务端返回数据格式"></a>服务端返回数据格式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;total: 8,row:[]&#125;</div></pre></td></tr></table></figure>
-<h5 id="合计"><a href="#合计" class="headerlink" title="合计"></a>合计</h5><p>table<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data-show-footer = &quot;true&quot;</div></pre></td></tr></table></figure></p>
-<p>th</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;th data-field=&quot;username&quot; data-footer-formatter=&quot;totalTextFormatter&quot;&gt;用户名&lt;/th&gt;</div><div class="line">&lt;th data-field=&quot;count&quot; data-footer-formatter=&quot;sumFormatter&quot;&gt;合计&lt;/th&gt;</div><div class="line"></div><div class="line">function totalTextFormatter(data) &#123;</div><div class="line">        return &apos;合计&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">function sumFormatter(data) &#123;</div><div class="line">    field = this.field;</div><div class="line">    var total_sum = data.reduce(function(sum, row) &#123;</div><div class="line">        return (sum) + (row[field] || 0);</div><div class="line">    &#125;, 0);</div><div class="line">    return total_sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/javaweb高级编程学习笔记-/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/javaweb高级编程学习笔记-/" itemprop="url">javaweb高级编程学习笔记-HttpServletResponseWrapper</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T05:34:49+08:00">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb高级编程学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb高级编程学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="利用HttpServletResponseWrapper修改Response对象"><a href="#利用HttpServletResponseWrapper修改Response对象" class="headerlink" title="利用HttpServletResponseWrapper修改Response对象"></a>利用HttpServletResponseWrapper修改Response对象</h3><p>有时我们可能需要从HttpServletResponse读取输出流，并对输出流做一些修改，但是如果我们直接对原始response进行操作则会造成输出流提前打开或者关闭，导致不能从一次请求中完成对输出流的修改。</p>
-<p>所以我们可以通过继承HttpServletResponseWrapper对象来获取原始的输出流，通过PrintWriter将输出流写入到Buffer中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public class ResponseWrapper extends HttpServletResponseWrapper &#123;</div><div class="line">    private PrintWriter cachedWriter;</div><div class="line">    private CharArrayWriter bufferedWriter;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Constructs a response adaptor wrapping the given response.</div><div class="line">     *</div><div class="line">     * @param response The response to be wrapped</div><div class="line">     * @throws IllegalArgumentException if the response is null</div><div class="line">     */</div><div class="line">    public ResponseWrapper(HttpServletResponse response) &#123;</div><div class="line">        super(response);</div><div class="line">        bufferedWriter = new CharArrayWriter();</div><div class="line">        cachedWriter = new PrintWriter(bufferedWriter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public PrintWriter getWriter() throws IOException &#123;</div><div class="line">        return cachedWriter;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获取原始HTML</div><div class="line">     *</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public String getResult() &#123;</div><div class="line">        byte[] bytes = bufferedWriter.toString().getBytes();</div><div class="line">        try &#123;</div><div class="line">            return new String(bytes, &quot;UTF-8&quot;);</div><div class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</div><div class="line">            return &quot;&quot;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过过滤器拦截Response对象，然后就可以对输出流进行操作了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class ResponseFilter implements Filter &#123;</div><div class="line">    @Override</div><div class="line">    public void init(javax.servlet.FilterConfig filterConfig) throws ServletException &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;</div><div class="line">        ResponseWrapper wrapper = new ResponseWrapper((HttpServletResponse) response);</div><div class="line">        chain.doFilter(request, wrapper);</div><div class="line">        String result = wrapper.getResult();</div><div class="line">        response.getOutputStream().write(result.getBytes());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void destroy() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/HttpClient使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/HttpClient使用/" itemprop="url">HttpClient的试用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T05:34:49+08:00">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">java笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="HttpClient的试用"><a href="#HttpClient的试用" class="headerlink" title="HttpClient的试用"></a>HttpClient的试用</h3><ol>
-<li><p>HttpClient 是 Apache Jakarta Common下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP协议的客户端编程工具包，并且它支持 HTTP协议最新的版本和建议。<br><a href="http://hc.apache.org/" target="_blank" rel="external">下载地址</a></p>
-</li>
-<li><p>使用httpclient执行get请求</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个GET对象</div><div class="line">HttpGet get =new HttpGet(&quot;http://www.sogou.com&quot;);</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
-<ol>
-<li>执行get请求带参数</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个uri对象</div><div class="line">URIBuilder uriBuilder = new URIBuilder(&quot;http://www.sogou.com/web&quot;);</div><div class="line">uriBuilder.addParameter(&quot;query&quot;,&quot;花千骨&quot;);</div><div class="line">HttpGet get = new HttpGet(uriBuilder.build());</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
-<ol>
-<li>使用httpclient执行post请求</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
-<ol>
-<li>带参数post请求</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//创建一个Entity。模拟一个表单</div><div class="line">List&lt;NameValuePair&gt;kvList = new ArrayList&lt;&gt;();</div><div class="line">kvList.add(new BasicNameValuePair(&quot;username&quot;,&quot;zhangsan&quot;));</div><div class="line">kvList.add(new BasicNameValuePair(&quot;password&quot;,&quot;123&quot;));</div><div class="line">//包装成一个Entity对象</div><div class="line">StringEntity entity = new UrlEncodedFormEntity(kvList,&quot;utf-8&quot;);</div><div class="line">//设置请求的内容</div><div class="line">post.setEntity(entity);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
-<ol>
-<li>post请求,参数是json对象</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">StringEntity entity = new StringEntity(jsonObject.toString(),&quot;utf-8&quot;);</div><div class="line">post.setEntity(entity);</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/js直接打印pdf内容/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rafa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rafa's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/js直接打印pdf内容/" itemprop="url">js直接打印pdf内容</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h6 id="js直接打印pdf内容"><a href="#js直接打印pdf内容" class="headerlink" title="js直接打印pdf内容"></a>js直接打印pdf内容</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;iframe style=&quot;display:none&quot; id=&quot;printIframe&quot; src=&quot;&lt;%=data%&gt;&quot;&gt;&lt;/iframe&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(document).ready(function()&#123;</div><div class="line">          doPrint();</div><div class="line"> </div><div class="line">&#125;);</div><div class="line">//点击打印按钮，触发事件】</div><div class="line">function doPrint()&#123;</div><div class="line">    $(&quot;#printIframe&quot;)[0].contentWindow.print();</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h6 id="springboot-获取静态资源文件"><a href="#springboot-获取静态资源文件" class="headerlink" title="springboot 获取静态资源文件"></a>springboot 获取静态资源文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private final ResourceLoader resourceLoader; </div><div class="line">	 @Autowired</div><div class="line">	 public FileUploadController(ResourceLoader resourceLoader) &#123; </div><div class="line">	 this.resourceLoader = resourceLoader; </div><div class="line">	 &#125; </div><div class="line">	 </div><div class="line">//显示图片的方法关键 匹配路径像 localhost:8080/b7c76eb3-5a67-4d41-ae5c-1642af3f8746.png </div><div class="line">	 @RequestMapping(method = RequestMethod.GET, value = &quot;/getfile/&#123;filename:.+&#125;&quot;) </div><div class="line">	 @ResponseBody</div><div class="line">	 public ResponseEntity&lt;?&gt; getFile(@PathVariable String filename) &#123; </div><div class="line">	  </div><div class="line">	 try &#123; </div><div class="line">	  return ResponseEntity.ok(resourceLoader.getResource(&quot;file:&quot; + &quot;src\\main\\resources\\static\\uploadFiles\\&quot;+filename)); </div><div class="line">	 &#125; catch (Exception e) &#123; </div><div class="line">	  return ResponseEntity.notFound().build(); </div><div class="line">	 &#125; </div><div class="line">	 &#125;</div></pre></td></tr></table></figure>
+            <h5 id="mybatis读取sqlserver中image类型字段"><a href="#mybatis读取sqlserver中image类型字段" class="headerlink" title="mybatis读取sqlserver中image类型字段"></a>mybatis读取sqlserver中image类型字段</h5><p>java中对应的类型是byte[]</p>
+<h5 id="byte-转化成inputstream"><a href="#byte-转化成inputstream" class="headerlink" title="byte[] 转化成inputstream"></a>byte[] 转化成inputstream</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InputStream iStream = new ByteArrayInputStream(imgByte);</div></pre></td></tr></table></figure>
+<h5 id="获取object的具体类型"><a href="#获取object的具体类型" class="headerlink" title="获取object的具体类型"></a>获取object的具体类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">object.getClass().getName()</div></pre></td></tr></table></figure>
+<h5 id="判断文件是否存在"><a href="#判断文件是否存在" class="headerlink" title="判断文件是否存在"></a>判断文件是否存在</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(new File(&quot;webapps\\PSSWeb\\artwork\\&quot;+</div><div class="line">							sg.getGoodCode()+&quot;.jpg&quot;)).exists()</div></pre></td></tr></table></figure>
 
           
         
@@ -1652,6 +633,1024 @@
         
           
             <p><a href="http://blog.csdn.net/ibooks/article/details/47948291" target="_blank" rel="external">http://blog.csdn.net/ibooks/article/details/47948291</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/mysql配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/mysql配置/" itemprop="url">mysql配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>把bin路径加到path</li>
+<li>在mysql文件夹下新增data文件夹</li>
+<li>到bin路径下运行命令行:mysqld –initialize-insecure –user=mysql </li>
+<li>mysqld install </li>
+<li>net start mysql </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/spring-boot项目如何实现热部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/spring-boot项目如何实现热部署/" itemprop="url">spring-boot项目如何实现热部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="spring-boot项目如何实现热部署"><a href="#spring-boot项目如何实现热部署" class="headerlink" title="spring-boot项目如何实现热部署"></a>spring-boot项目如何实现热部署</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</div><div class="line">            &lt;optional&gt;true&lt;/optional&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springboot 404页面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/springboot 404页面/" itemprop="url">springboot 404页面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="设置404错误页面"><a href="#设置404错误页面" class="headerlink" title="设置404错误页面"></a>设置404错误页面</h3><p>在resources/static下面增加error文件夹，在此文件夹下面增加404.html</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/mybatis调用存储过程(注解方式,有inout参数)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/mybatis调用存储过程(注解方式,有inout参数)/" itemprop="url">mybatis注解方式调用存储过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>存储过程代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ALTER    PROCEDURE [dbo].[prSaveMemVariable] (</div><div class="line">	@vhrStorefront VARCHAR(1)</div><div class="line">	,@chrVariable VARCHAR(40)</div><div class="line">	,@chrValue VARCHAR(200)</div><div class="line">	,@bitGetCode BIT = 0</div><div class="line">	,@GetValue VARCHAR(100) OUTPUT</div><div class="line">	)</div><div class="line">AS</div></pre></td></tr></table></figure>
+<ol>
+<li>Mapper.java注解代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Select(&quot;exec prSaveMemVariable #&#123;shopCode&#125;,#&#123;billType&#125;,&apos;&apos;,1,#&#123;billcode,mode=INOUT,jdbcType=VARCHAR&#125;&quot;)</div><div class="line">@Options(statementType = StatementType.CALLABLE)</div><div class="line">public String getBillCode(Map&lt;String,Object&gt; map);</div></pre></td></tr></table></figure>
+<ol>
+<li>demo.java services中调用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Map&lt;String,Object&gt; map = new HashMap&lt;String,Object&gt;();</div><div class="line">map.put(&quot;shopCode&quot;, &quot;1&quot;);</div><div class="line">map.put(&quot;billType&quot;, &quot;订单编码&quot;);</div><div class="line">map.put(&quot;billcode&quot;, &quot;&quot;);</div><div class="line">String code = billMapper.getBillCode(map);</div><div class="line">for (Entry&lt;String, Object&gt; s : map.entrySet()) &#123;</div><div class="line">	System.out.println(&quot;键值对:&quot; + s);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springboot 属性配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/springboot 属性配置/" itemprop="url">springboot 属性配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">foo:</div><div class="line">    remote-address: 192.168.1.1</div><div class="line">    security:</div><div class="line">        username: foo</div><div class="line">        roles:</div><div class="line">          - USER</div><div class="line">          - ADMIN</div></pre></td></tr></table></figure>
+<h3 id="FooProperties-java"><a href="#FooProperties-java" class="headerlink" title="FooProperties.java"></a>FooProperties.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">@ConfigurationProperties(&quot;foo&quot;)</div><div class="line">public class FooProperties &#123;</div><div class="line">    private boolean enabled;</div><div class="line"></div><div class="line">    private InetAddress remoteAddress;</div><div class="line"></div><div class="line">    public boolean isEnabled() &#123;</div><div class="line">        return enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEnabled(boolean enabled) &#123;</div><div class="line">        this.enabled = enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public InetAddress getRemoteAddress() &#123;</div><div class="line">        return remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setRemoteAddress(InetAddress remoteAddress) &#123;</div><div class="line">        this.remoteAddress = remoteAddress;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Security getSecurity() &#123;</div><div class="line">        return security;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private final Security security = new Security();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    public static class Security &#123;</div><div class="line"></div><div class="line">        private String username;</div><div class="line"></div><div class="line">        public String getUsername() &#123;</div><div class="line">            return username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setUsername(String username) &#123;</div><div class="line">            this.username = username;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public String getPassword() &#123;</div><div class="line">            return password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setPassword(String password) &#123;</div><div class="line">            this.password = password;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public List&lt;String&gt; getRoles() &#123;</div><div class="line">            return roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setRoles(List&lt;String&gt; roles) &#123;</div><div class="line">            this.roles = roles;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private String password;</div><div class="line"></div><div class="line">        private List&lt;String&gt; roles = new ArrayList&lt;&gt;(Collections.singleton(&quot;USER&quot;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">public class Application implements EmbeddedServletContainerCustomizer, CommandLineRunner &#123;</div><div class="line">    @Autowired</div><div class="line">    private FooProperties properties;</div><div class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        SpringApplication.run(Application.class, args);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void customize(ConfigurableEmbeddedServletContainer container) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        container.setPort(7777);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void run(String... strings) throws Exception &#123;</div><div class="line">        logger.info(properties.getRemoteAddress().toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/springboot 配置转换成实体类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/springboot 配置转换成实体类/" itemprop="url">springboot 配置转换成实体类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>实体类上增加@ConfigurationProperties</li>
+<li>application.yml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">guns:</div><div class="line">  swagger-open: true #是否开启swagger (true/false)</div><div class="line">  kaptcha-open: false #是否开启登录时验证码 (true/false)</div><div class="line">  session-open: false #是否开启session超时验证（受影响的类SessionTimeoutInterceptor） (true/false)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">@ConfigurationProperties(prefix = GunsProperties.PREFIX)</div><div class="line">public class GunsProperties &#123;</div><div class="line"></div><div class="line">    public static final String PREFIX = &quot;guns&quot;;</div><div class="line"></div><div class="line">    private Boolean kaptchaOpen = false;</div><div class="line"></div><div class="line">    private Boolean swaggerOpen = false;</div><div class="line"></div><div class="line">    private String fileUploadPath;</div><div class="line"></div><div class="line">    private Boolean haveCreatePath = false;</div><div class="line"></div><div class="line">    private Boolean springSessionOpen = false;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kufei88.github.io/2017/11/27/HttpClient使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rafa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rafa's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/HttpClient使用/" itemprop="url">HttpClient的试用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T21:34:49Z">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HttpClient的试用"><a href="#HttpClient的试用" class="headerlink" title="HttpClient的试用"></a>HttpClient的试用</h3><ol>
+<li><p>HttpClient 是 Apache Jakarta Common下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP协议的客户端编程工具包，并且它支持 HTTP协议最新的版本和建议。<br><a href="http://hc.apache.org/" target="_blank" rel="external">下载地址</a></p>
+</li>
+<li><p>使用httpclient执行get请求</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个GET对象</div><div class="line">HttpGet get =new HttpGet(&quot;http://www.sogou.com&quot;);</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>执行get请求带参数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//创建一个httpclient对象</div><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个uri对象</div><div class="line">URIBuilder uriBuilder = new URIBuilder(&quot;http://www.sogou.com/web&quot;);</div><div class="line">uriBuilder.addParameter(&quot;query&quot;,&quot;花千骨&quot;);</div><div class="line">HttpGet get = new HttpGet(uriBuilder.build());</div><div class="line">//执行请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(get);</div><div class="line">//取响应的结果</div><div class="line">int statusCode =response.getStatusLine().getStatusCode();</div><div class="line">System.out.println(statusCode);</div><div class="line">HttpEntity entity =response.getEntity();</div><div class="line">String string = EntityUtils.toString(entity,&quot;utf-8&quot;);</div><div class="line">System.out.println(string);</div><div class="line">//关闭httpclient</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>使用httpclient执行post请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>带参数post请求</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">CloseableHttpClient httpClient = HttpClients.createDefault();</div><div class="line">//创建一个post对象</div><div class="line">HttpPost post =new HttpPost(&quot;http://localhost:8082/httpclient/post.html&quot;);</div><div class="line">//创建一个Entity。模拟一个表单</div><div class="line">List&lt;NameValuePair&gt;kvList = new ArrayList&lt;&gt;();</div><div class="line">kvList.add(new BasicNameValuePair(&quot;username&quot;,&quot;zhangsan&quot;));</div><div class="line">kvList.add(new BasicNameValuePair(&quot;password&quot;,&quot;123&quot;));</div><div class="line">//包装成一个Entity对象</div><div class="line">StringEntity entity = new UrlEncodedFormEntity(kvList,&quot;utf-8&quot;);</div><div class="line">//设置请求的内容</div><div class="line">post.setEntity(entity);</div><div class="line">//执行post请求</div><div class="line">CloseableHttpResponse response =httpClient.execute(post);</div><div class="line">String string = EntityUtils.toString(response.getEntity());</div><div class="line">System.out.println(string);</div><div class="line">response.close();</div><div class="line">httpClient.close();</div></pre></td></tr></table></figure>
+<ol>
+<li>post请求,参数是json对象</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">StringEntity entity = new StringEntity(jsonObject.toString(),&quot;utf-8&quot;);</div><div class="line">post.setEntity(entity);</div></pre></td></tr></table></figure>
 
           
         
